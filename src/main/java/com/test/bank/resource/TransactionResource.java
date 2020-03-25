@@ -39,11 +39,14 @@ public class TransactionResource extends BaseResource {
     public Response transfer(
             @NotNull @HeaderParam("Token") String token,
             @NotNull @Valid TransferRequest transferRequest) {
+
+        // authenticate the request using token in the header
         boolean auth = adminService.authenticate(token);
         if (!auth) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
-        TransferResponse transferResponse = transactionService.transfer(transferRequest.getFromUserId(), transferRequest.getToUserId(), transferRequest.getAmount());
+        // TransferResponse transferResponse = transactionService.transfer(transferRequest.getFromUserId(), transferRequest.getToUserId(), transferRequest.getAmount());
+        TransferResponse transferResponse = null;
         return Response.ok(transferResponse).build();
     }
 

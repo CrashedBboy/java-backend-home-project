@@ -15,6 +15,9 @@ import java.util.Base64;
 import static com.test.bank.db.Tables.ADMIN;
 import static com.test.bank.db.Tables.TOKEN;
 
+// import record class for storing returned record from JOOQ queries
+import com.test.bank.db.tables.records.TokenRecord;
+
 @Singleton
 public class AdminService {
 
@@ -39,8 +42,21 @@ public class AdminService {
         return token;
     }
 
+    // called before transaction (in TransactionResource)
     public boolean authenticate(String token) {
-        // TODO implement authenticate
+        // implement authenticate
+
+        System.out.println("Searching for token: " + token);
+        TokenRecord record = DSL.using(jooqConfiguration).fetchOne(TOKEN, TOKEN.TOKEN_.eq(token));
+
+        if (record != null) {
+
+            System.out.println("Token fetched: AdminId=" + record.getAdminid() + ", Token=" + record.getToken());
+
+            return true;
+        }
+        
+        System.out.println("Token not found");
         return false;
     }
 

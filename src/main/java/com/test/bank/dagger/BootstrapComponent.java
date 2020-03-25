@@ -12,6 +12,7 @@ import javax.inject.Singleton;
 public interface BootstrapComponent {
     void inject(MicroServiceApplication microServiceApplication);
 
+    // register resources?
     AdminResource adminResource();
 
     TransactionResource transactionResource();

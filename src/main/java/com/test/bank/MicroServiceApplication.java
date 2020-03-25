@@ -1,13 +1,25 @@
 package com.test.bank;
 
+/**
+ * A Dropwizard configuration factory (and factory factory) so that 
+ * you can use typesafe config files instead of yml files to configure Dropwizard.
+ * You don't have to pass a config into your start-up command 
+ * if you have an application.conf file in your resources folder (src/main/resources/application.conf)
+ * check: https://github.com/mestevens/typesafe-dropwizard-configuration
+ */
 import ca.mestevens.java.configuration.TypesafeConfiguration;
 import ca.mestevens.java.configuration.bundle.TypesafeConfigurationBundle;
+
+// for dependency injection, use @Inject and @Provide
 import com.test.bank.dagger.BootstrapComponent;
 import com.test.bank.dagger.BootstrapModule;
 import com.test.bank.dagger.DaggerBootstrapComponent;
+
 import com.test.bank.initializer.DataSourceInitializer;
 import com.test.bank.initializer.JerseyInitializer;
+
 import com.test.bank.tool.config.EnvConfigManager;
+
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;

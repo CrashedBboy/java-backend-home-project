@@ -45,8 +45,7 @@ public class TransactionResource extends BaseResource {
         if (!auth) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
-        // TransferResponse transferResponse = transactionService.transfer(transferRequest.getFromUserId(), transferRequest.getToUserId(), transferRequest.getAmount());
-        TransferResponse transferResponse = null;
+        TransferResponse transferResponse = transactionService.transfer(transferRequest.getFromUserId(), transferRequest.getToUserId(), transferRequest.getAmount());
         return Response.ok(transferResponse).build();
     }
 
